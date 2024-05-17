@@ -1,0 +1,696 @@
+$z-index: 1;
+
+.ufo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: $z-index;
+
+  /* UFO parts */
+  .ufo {
+    position: absolute;
+    top: 40px;
+    width: 400px;
+    height: 175px;
+    background: #414141;
+    border-radius: 50%;
+    margin-top: 100px;
+    animation: moveUpDown 2s infinite alternate; /* Using an animation */
+
+    @keyframes moveUpDown {
+      0% {
+        transform: translateY(0); /* Start position */
+      }
+      100% {
+        transform: translateY(-10px); /* End position, adjust -20px to desired distance */
+      }
+    }
+
+    /* Keyframes for UFO flying away */
+    @keyframes fly {
+      0% {
+        left: 50%; /* Start from the center */
+        transform: translateX(-50%);
+      }
+      100% {
+        left: -430px; /* End position, adjust distance as needed */
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Apply the fly animation when .ufo-slide class is added */
+    &.ufo-slide {
+      animation: fly 4s forwards; /* Apply the fly animation */
+    }
+  }
+
+  .ufo-underside {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    width: 398px;
+    height: 163px;
+    background: #898988;
+    border-radius: 50%;
+    z-index: $z-index + 1;
+
+    @keyframes rainbowText {
+      0% { color: #ff9494; } /* Red */
+      16.67% { color: #ff7f00; } /* Orange */
+      33.33% { color: #ffff00; } /* Yellow */
+      50% { color: #00ff00; } /* Green */
+      66.67% { color: #0affdb; } /* Blue */
+      83.33% { color: #87bbff; } /* Indigo */
+      100% { color: #ecc3ff; } /* Violet */
+    }
+
+    .title-screen {
+      border: 10px solid #333; /* TV frame */
+      border-radius: 15px; /* Rounded corners for the TV frame */
+      margin-left: 108px;
+      margin-top: 111px;
+      background-color: #333; /* TV screen background color */
+      width: 180px; /* Adjusted width for the TV effect */
+      height: 40px; /* Adjusted height for the TV effect */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); /* TV shadow effect */
+
+      h2 {
+        animation: rainbowText 5s infinite; /* Rainbow text animation */
+        font-size: 20px; /* Adjust font size for the TV effect */
+        text-align: center; /* Center text within the TV screen */
+      }
+    }
+
+  }
+
+  .monster {
+    font-size: 3.7em;
+    margin: 0 auto;
+    width: 1em;
+    height: 1.3em;
+    border-radius: 0.5em 0.5em 0em 0em / 0.6em 0.6em 0em 0em;
+    box-sizing: content-box;
+    border: 0.07em solid transparent;
+    position: relative;
+    top: 22px;
+    user-select: none;
+    cursor: grab;
+    z-index: $z-index + 2;
+  }
+
+  .monster.small {
+    font-size: 4rem;
+  }
+
+  .body {
+    width: 100%;
+    height: 100%;
+    background-color: currentColor;
+    border-radius: inherit;
+    position: relative;
+    transform-origin: bottom center;
+    animation: bouncebody alternate infinite 400ms 40ms ease-in-out;
+  }
+  .eyes, .eye-lid {
+    text-align: center;
+    display: flex;
+    font-size: 0.65em;
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    left: 0.25em;
+    top: 0.3em;
+  }
+
+  .eye {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    width: 75%;
+    height: 75%;
+    background-color: black;
+    border-radius: 50%;
+  }
+  .eye-lid{
+    background-color: white;
+    border-radius: 0.5em 0.5em 0.5em 0.5em / 0.6em 0.6em 0.4em 0.4em;
+    box-shadow: 0.03em 0.14em rgba(0,0,0,0.1);
+    animation: blink forwards infinite 10s ease-in-out;
+  }
+
+  .eye:after { /*white shadow*/
+    --pupil-size: 0.2em;
+    position: absolute;
+    top: 0.05em;
+    left: 0.3em;
+    width: var(--pupil-size);
+    height: var(--pupil-size);
+    background: white;
+    border-radius: 50%;
+    content: " ";
+  }
+
+  .mouth {
+    font-size: 0.2em;
+    width: 1em;
+    height: 0.3em;
+    background: black;
+    border-radius: 1.5em 1.5em 0.5em 0.5em;
+    position: absolute;
+    bottom: 0.8em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .mouth::before {
+    width: 50%;
+    height: 30%;
+    display: block;
+    content: ' ';
+    background-color: #ff8800;
+    border-radius: 50% / 100% 100% 50% 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-10%) translateX(-50%);
+  }
+
+  .vampi-mouth {
+    position: absolute;
+    background: black;
+    overflow: hidden;
+    font-size: 0.3em;
+    width: 1em;
+    height: 0.7em;
+    left: 50%;
+    bottom: 0.3em;
+    transform: translateX(-50%);
+    border-radius: 0.7em 0.7em 1.2em 1.2em;
+  }
+
+  .vampi-mouth::before {
+    content: '';
+    display: block;
+    background: #ff8800;
+    width: 100%;
+    height: 0.2em;
+    position: absolute;
+    bottom: 0;
+    border-radius: 50% 50% 0 0;
+  }
+
+  .vampi-tooth::before,
+  .vampi-tooth::after,
+  .vampi-tooth {
+    --teeth-size: 0.25em;
+    display: block;
+    width: 0;
+    height: 0;
+    font-size: inherit;
+    border-left: calc(var(--teeth-size) / 2) solid transparent;
+    border-right: calc(var(--teeth-size) / 2) solid transparent;
+    border-top: var(--teeth-size) solid #fff;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .vampi-tooth:before {
+    content: '';
+    transform: translateX(-150%) translateY(-100%);
+  }
+
+  .vampi-tooth:after {
+    content: '';
+    transform: translateX(50%) translateY(-100%);
+  }
+
+  .ear {
+    position: absolute;
+    top: -1.2em;
+    transform-origin: bottom center;
+    font-size: 0.3em;
+    width: .8em;
+    height: 1.5em;
+    left: 18%;
+    transform: rotate(-10deg);
+    animation: antena_e 5s infinite;
+  }
+
+  .ear + .ear {
+    left: auto;
+    right: 18%;
+    transform: rotate(10deg);
+    animation: antena_d 5s infinite;
+  }
+
+  .ear:before {
+    content: '';
+    display: block;
+    width: .8em;
+    height: .8em;
+    position: absolute;
+    z-index: $z-index + 2;
+    left: 0;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: inset -.1em -.08em rgba(0,0,0,.1);
+  }
+
+  .ear:after {
+    content: '';
+    display: block;
+    width: 0.3em;
+    height: 100%;
+    position: absolute;
+    top: .2em;
+    left: .3em;
+    background: currentColor;
+  }
+
+  @keyframes blink {
+    0%, 2%, 60%, 62%, 100% { transform: scaleX(1) scaleY(1); }
+    1%, 61% { transform: scaleX(1.3) scaleY(0.1); }
+  }
+
+  @keyframes bounce {
+    to { transform: translateY(4%); }
+  }
+
+  @keyframes bouncebody {
+    to { transform: scaleX(1.03) scaleY(0.97); }
+  }
+
+  @keyframes antena_d { 50% {transform: rotate(20deg);} }
+  @keyframes antena_e { 50% {transform: rotate(-20deg);} }
+
+  .ufo-top {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* background: #898988; */
+    background: rgba(255, 255, 255, 0.3);
+    height: 175px;
+    width: 275px;
+    border-radius: 50% 50% 50% 50% / 50% 50% 30% 30%;
+    border-bottom: 8px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    z-index: $z-index + 3;
+  }
+
+  /* Beam */
+  .beam {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 215px;
+    bottom: 0; /* Extend to the bottom */
+    width: 400px; /* Adjusted width for a slightly smaller beam */
+    clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%); /* Slightly smaller and slightly sloped clip-path */
+    z-index: -2;
+    transition: height 2.5s ease; /* Add transition for smooth height change */
+  }
+
+  .beam::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%; /* Changed to 100% to match the width of the .beam element */
+    background: linear-gradient(to bottom,
+      rgb(3, 165, 17),
+      rgba(36, 249, 3, 0.1)
+    );
+    animation: beamIn 4s infinite;
+  }
+
+  /* Opacity animation */
+  @keyframes beamIn {
+    0% {
+      opacity: 0.82;
+    }
+    50% {
+      opacity: 1; /* Changed to make the animation more noticeable */
+    }
+    100% {
+      opacity: 0.82;
+    }
+  }
+
+  @keyframes beamSlideDown {
+    0% {
+      height: 0; /* Start with no height */
+    }
+    100% {
+      height: 100%; /* Peak height */
+    }
+  }
+
+  @keyframes beamSlideUp{
+    0% {
+      height: 100%; /* Start with no height */
+    }
+    100% {
+      height: 0; /* Peak height */
+    }
+  }
+
+  .beam-slide-down::before {
+    animation: beamSlideDown 1.6s, beamIn 4s infinite; /* Apply the slide animation only when .beam-slide class is added */
+  }
+
+  .beam-slide-up::before {
+    animation: beamSlideUp 1.6s, beamIn 4s infinite; /* Apply the slide animation only when .beam-slide class is added */
+  }
+
+  /* Register and Login Forms */
+  .login-form,
+  .register-form {
+    position: absolute;
+    top: 18%;
+    margin-top: 0;
+    margin-left: 0;
+    color: white;
+
+    label {
+      font-weight: bold;
+    }
+
+    .label-email {
+      margin-left: 183px;
+    }
+
+    .label-password {
+      margin-left: 168px;
+    }
+
+    .label-repeat-password {
+      margin-left: 140px;
+    }
+
+    input {
+      display: block;
+      width: 300px;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      margin-left: 50px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      left: 160px;
+      display: inline-block;
+      font-weight: 400;
+      color: #fff;
+      text-align: center;
+      vertical-align: middle;
+      user-select: none;
+      background-color: rgba(0, 123, 255, 0.9); /* Semi-transparent color */
+      border: 1px solid transparent;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      cursor: pointer;
+      z-index: 9999;
+      position: relative;
+    }
+
+    button:hover {
+      color: #fff;
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    span {
+      cursor: pointer;
+    }
+  }
+
+  /* Animation for Login Form Slide */
+  @keyframes loginFormSlideUp {
+    0% {
+      top: 18%; /* Start with no height */
+    }
+    100% {
+      top: -360px; /* Peak height */
+    }
+  }
+
+  @keyframes loginFormSlideDown {
+    0% {
+      top: -360px; /* Start with no height */
+    }
+    100% {
+      top: 18%; /* Peak height */
+    }
+  }
+
+  .login-form-slide-up {
+    animation: loginFormSlideUp 1.6s;
+  }
+
+  .login-form-slide-down {
+    animation: loginFormSlideDown 1.6s;
+  }
+
+  /* Animation for Register Form Slide */
+  @keyframes registerFormSlideUp {
+    0% {
+      top: 18%; /* Start with no height */
+    }
+    100% {
+      top: -360px; /* Peak height */
+    }
+  }
+
+  /* Animation for Register Form Slide */
+  @keyframes registerFormSlideDown{
+    0% {
+      top: -360px; /* Start with no height */
+    }
+    100% {
+      top: 18%; /* Peak height */
+    }
+  }
+
+  .register-form-slide-up {
+    animation: registerFormSlideUp 1.6s;
+  }
+
+  .register-form-slide-down {
+    animation: registerFormSlideDown 1.6s;
+  }
+}
+
+/* Animation for Register Form Slide */
+@keyframes flyingErrorSlideDown{
+  0% {
+    top: -315px; /* Start with no height */
+  }
+  100% {
+    top: 200px; /* Peak height */
+  }
+}
+
+@keyframes flyingErrorFloating {
+  0% {
+    transform: translateY(0); /* Start position */
+  }
+  50% {
+    transform: translateY(-10px); /* middel position, adjust -20px to desired distance */
+  }
+  100% {
+    transform: translateY(0); /* end position */
+  }
+}
+
+.flying-error-div {
+  top: 200px;
+  position: absolute;
+  margin-left: 223px;
+  z-index: 2; // Set z-index higher for the container
+  animation: flyingErrorSlideDown 5s, flyingErrorFloating 4s infinite;
+
+  .flying-error {
+    background-color: #898988;
+    color: #7e0101;
+    border: 3px solid #2d2d2d;
+    width: 350px;
+    height: 200px;
+    font-size: 20px;
+    font-family: cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center; // Center vertically
+    text-align: center; // Center horizontally
+    border-radius: 3%;
+  }
+
+  .rockets-div {
+    display: flex;
+    margin-top: -30px;
+    margin-left: 10px;
+
+    .rocket {
+      width: 2vw;
+      height: 4vw;
+      clip-path: polygon(0 0, 100% 20%, 100% 80%, 0% 100%);
+      background: #676767;
+      transform: rotate(-90deg);
+      z-index: -1; // Set z-index lower than .flying-error
+      border: 1px solid black;
+
+      &.two {
+        margin-left: 253px;
+      }
+    }
+  }
+
+
+  .rocket-fire {
+    display: flex;
+    position: absolute;
+    z-index: -2;
+    margin-top: -20px;
+
+    &.one {
+      $fireWidth: 10px;
+      $fireHeight: 10px;
+
+      .spark:nth-child(1) {
+        position: absolute;
+        height: $fireHeight + 10px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 1.6s 0.8s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(2) {
+        height: $fireHeight + 30px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 2.2s 0.8s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(3) {
+        height: $fireHeight + 45px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 1.8s 1s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(4) {
+        height: $fireHeight + 68px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 2s 0.8s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(5) {
+        height: $fireHeight + 50px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 1.5s 0.7s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(6) {
+        height: $fireHeight + 35px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 1s 0.8s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(7) {
+        height: $fireHeight + 20px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 2s 0.8s ease-in-out infinite alternate;
+      }
+    }
+
+    &.two {
+      $fireWidth: 10px;
+      $fireHeight: 10px;
+
+      margin-left: 291px;
+
+      .spark:nth-child(1) {
+        position: absolute;
+        height: $fireHeight + 10px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 1.6s 0.8s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(2) {
+        height: $fireHeight + 30px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 2.2s 0.8s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(3) {
+        height: $fireHeight + 45px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 1.8s 1s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(4) {
+        height: $fireHeight + 68px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 2s 0.8s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(5) {
+        height: $fireHeight + 50px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 1.5s 0.7s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(6) {
+        height: $fireHeight + 35px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 1s 0.8s ease-in-out infinite alternate;
+      }
+
+      .spark:nth-child(7) {
+        height: $fireHeight + 20px;
+        width: $fireWidth;
+        background-color: #ff6a00;
+        animation: fire 2s 0.8s ease-in-out infinite alternate;
+      }
+    }
+  }
+
+
+
+  @keyframes fire {
+    0%, 100% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(1.3);
+    }
+  }
+}

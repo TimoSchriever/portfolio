@@ -1,0 +1,53 @@
+.falling-star {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #ffffff 20%, transparent 40%);
+  border-radius: 50%;
+  z-index: 1; // Make sure it's on top
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 80px solid transparent;
+    border-top: 20px solid #ffffff4d; // Adjusted border-top for a more pointy trail
+    right: -120px; // Adjust the distance of the trail from the star to point to top right
+    top: -50px; // Adjusted the trail's starting position higher
+    transform: rotate(-25deg) translateY(-50%) translateX(-50%); // Point to top right corner
+    transform-origin: bottom right; // Set transform origin for proper rotation
+    animation: trail 5s linear;
+    z-index: -1; // Behind the star
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translate(0, -10vh) scale(1); // Start from top right
+    }
+    100% {
+      transform: translate(-100vw, 100vh) scale(1); // End at bottom left
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px 2px #ffffff4d, 0 0 10px 5px #ffffff4d;
+    }
+    100% {
+      box-shadow: 0 0 10px 10px #ffffff4d, 0 0 20px 20px #ffffff4d;
+    }
+  }
+
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  animation: fall 5s linear, glow 1.5s ease-in-out alternate, twinkle 2s linear;
+}
